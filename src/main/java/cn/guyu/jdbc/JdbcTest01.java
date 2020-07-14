@@ -18,21 +18,21 @@ public class JdbcTest01 {
         // 编写JDBC代码
         Class.forName("org.apache.hive.jdbc.HiveDriver");
 
-        String url = "jdbc:hive2://192.168.244.201:10000/default"; //换成自己的
+        String url = "jdbc:hive2://192.168.244.201:10000/guyudb"; //换成自己的
         String username = "root";
         String userpwd = "guyu"; //换成自己的
         Connection connection = DriverManager.getConnection(url, username, userpwd);
 
-        String sql = "select * from t_orders";
+        String sql = "select * from testdata";
         //sql 注入问题
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
         //提交数据库 执行sql
         ResultSet rs = preparedStatement.executeQuery();
         while (rs.next()) {
-            System.out.println(rs.getString("order_id"));
+            System.out.println(rs.getString("stdname"));
         }
-
+        System.out.println("结束");
         preparedStatement.close();
         connection.close();
 
